@@ -24,6 +24,11 @@
 			<artifactId>polygraph.syslib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.illmeyer</groupId>
+			<artifactId>polygraph.plumbing</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<name>Simple Distribution</name>
 <build>
