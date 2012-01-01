@@ -4,6 +4,7 @@
 	<groupId>com.illmeyer</groupId>
 	<artifactId>polygraph.dist.simple</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<name>Simple Distribution</name>
 	<description>Polygraph Bulk Messaging System - Simple distribution</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,19 +30,23 @@
 			<artifactId>polygraph.plumbing</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
 	</dependencies>
-	<name>Simple Distribution</name>
-<build>
-<plugins>
-        <plugin>
-                        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2.2</version>
-        <configuration>
-          <descriptors>
-            <descriptor>src/main/assembly/dist.xml</descriptor>
-          </descriptors>
-        </configuration>
-        </plugin>
-</plugins>
-</build>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2.2</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/dist.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -1,0 +1,24 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+    "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+<bean id="addressSupplier" class="com.illmeyer.polygraph.plumbing.CsvAddressSupplier">
+<property name="input"><value>file:/tmp/simpletest/input.csv</value></property>
+</bean>
+
+<bean id="messageDispatcher" class="com.illmeyer.polygraph.plumbing.DiskCacheDispatcher">
+<property name="cacheDirectory"><value>file:/tmp/simpletest/cache</value></property>
+</bean>
+
+<bean id="templateDataProvider" class="com.illmeyer.polygraph.plumbing.XmlTemplateDataProvider">
+<property name="xmlInput"><value>file:/tmp/simpletest/templatedata.xml</value></property>
+</bean>
+
+<bean id="gun" class="com.illmeyer.polygraph.core.Gun">
+<property name="addressSupplier"><ref bean="addressSupplier"/></property>
+<property name="dispatcher"><ref bean="messageDispatcher"/></property>
+<property name="templateDataProvider"><ref bean="templateDataProvider"/></property>
+</bean>
+
+</beans>
