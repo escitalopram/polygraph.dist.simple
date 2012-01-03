@@ -4,15 +4,16 @@
 <beans>
 
 <bean id="addressSupplier" class="com.illmeyer.polygraph.plumbing.CsvAddressSupplier">
-<property name="input"><value>file:/tmp/simpletest/input.csv</value></property>
+<property name="input"><value>file:config/demo/input.csv</value></property>
+<property name="addressColumns"><value>email</value></property>
 </bean>
 
 <bean id="messageDispatcher" class="com.illmeyer.polygraph.plumbing.DiskCacheDispatcher">
-<property name="cacheDirectory"><value>file:/tmp/simpletest/cache</value></property>
+<property name="cacheDirectory"><value>file:cache/</value></property>
 </bean>
 
 <bean id="templateDataProvider" class="com.illmeyer.polygraph.plumbing.XmlTemplateDataProvider">
-<property name="xmlInput"><value>file:/tmp/simpletest/templatedata.xml</value></property>
+<property name="xmlInput"><value>file:config/demo/templatedata.xml</value></property>
 </bean>
 
 <bean id="gun" class="com.illmeyer.polygraph.core.Gun">
