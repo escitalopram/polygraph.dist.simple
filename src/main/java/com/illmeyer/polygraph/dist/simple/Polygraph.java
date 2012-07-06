@@ -24,7 +24,6 @@ public class Polygraph {
 		gc.initialize();
 		Gun g = (Gun)xbf.getBean("gun");
 		g.setConfigurator(gc);
-		g.configure(gc);
 		g.initialize();
 		g.trigger();
 		g.destroy();

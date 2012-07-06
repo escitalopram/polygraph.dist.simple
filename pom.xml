@@ -35,6 +35,19 @@
 			<artifactId>spring-beans</artifactId>
 			<version>3.1.0.RELEASE</version>
 		</dependency>
+		<dependency>
+		<groupId>com.illmeyer</groupId>
+			<artifactId>testtemplate</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>
