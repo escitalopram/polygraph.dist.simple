@@ -6,8 +6,8 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
-import com.illmeyer.polygraph.core.DefaultGunConfigurator;
 import com.illmeyer.polygraph.core.Gun;
+import com.illmeyer.polygraph.core.init.DefaultGunConfigurator;
 
 public class Polygraph {
 

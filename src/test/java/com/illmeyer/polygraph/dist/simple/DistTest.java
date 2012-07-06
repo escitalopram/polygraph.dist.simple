@@ -8,9 +8,9 @@ import java.util.HashSet;
 
 import org.junit.Test;
 
-import com.illmeyer.polygraph.core.DefaultGunConfigurator;
 import com.illmeyer.polygraph.core.Gun;
-import com.illmeyer.polygraph.core.TemplateDataProvider;
+import com.illmeyer.polygraph.core.init.DefaultGunConfigurator;
+import com.illmeyer.polygraph.core.spi.TemplateDataProvider;
 import com.illmeyer.polygraph.messagetype.mail.Mail;
 import com.illmeyer.polygraph.plumbing.CsvAddressSupplier;
 import com.illmeyer.polygraph.plumbing.DiskCacheDispatcher;
