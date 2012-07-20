@@ -19,25 +19,34 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package com.illmeyer.polygraph.dist.simple;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 
 import org.junit.Test;
 
+import com.dumbster.smtp.SimpleSmtpServer;
+import com.dumbster.smtp.SmtpMessage;
 import com.illmeyer.polygraph.core.Gun;
 import com.illmeyer.polygraph.core.init.DefaultGunConfigurator;
+import com.illmeyer.polygraph.mail.dispatch.JavaMailDispatcher;
 import com.illmeyer.polygraph.messagetype.mail.Mail;
 import com.illmeyer.polygraph.plumbing.CsvAddressSupplier;
-import com.illmeyer.polygraph.plumbing.DiskCacheDispatcher;
 import com.illmeyer.polygraph.plumbing.XmlTemplateDataProvider;
 import com.illmeyer.polygraph.testtemplate.TestTemplate;
 
 public class DistTest {
 	@Test
 	public void testMail() throws IOException {
+		SimpleSmtpServer serv = SimpleSmtpServer.start(8025);
+		
 		Gun g = new Gun();
 		DefaultGunConfigurator gc = new DefaultGunConfigurator();
 		gc.setActiveTemplate(TestTemplate.class.getName());
@@ -49,9 +58,23 @@ public class DistTest {
 		asup.setAddressColumns(new HashSet<String>(Arrays.asList(new String[]{"email"})));
 		g.setAddressSupplier(asup);
 		
-		DiskCacheDispatcher dcp = new DiskCacheDispatcher();
-		dcp.setCacheDirectory(new File(System.getProperty("java.io.tmpdir")));
-		g.setDispatcher(dcp);
+		JavaMailDispatcher dis = new JavaMailDispatcher();
+		Properties p = new Properties();
+		p.setProperty("mail.smtp.host", "localhost");
+		p.setProperty("mail.smtp.port", "8025");
+		p.setProperty("mail.transport.protocol", "smtp");
+		p.put("mail.smtp.auth", Boolean.TRUE);
+		Session s = Session.getInstance(p,new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("user", "pass");
+			}
+		});
+		s.setDebug(true);
+		s.setDebugOut(System.out);
+		dis.setSession(s);
+		dis.initialize();
+		g.setDispatcher(dis);
 		
 		Mail m = new Mail();
 		g.setMt(m);
@@ -62,5 +85,13 @@ public class DistTest {
 		
 		g.initialize();
 		g.trigger();
+		
+		serv.stop();
+		@SuppressWarnings("unchecked")
+		Iterator<SmtpMessage> x = serv.getReceivedEmail();
+		while (x.hasNext()) {
+			SmtpMessage msg = x.next();
+			System.out.println(msg+"\n\n\n\n");
+		}
 	}
 }
